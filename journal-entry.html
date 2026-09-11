@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="page-title">Journal — Bookhearth</title>
+<meta name="description" content="A journal entry from Bookhearth.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main id="journal-main">
+  <div class="wrap"><p style="padding: 60px 0; color: var(--ink-soft);">Loading entry…</p></div>
+</main>
+
+<div id="site-footer"></div>
+
+<script src="loader.js"></script>
+<script src="script.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", async () => {
+  const slug = getParam("slug");
+  const entries = await getJournal();
+  const j = entries.find(x => x.slug === slug);
+  const main = document.getElementById("journal-main");
+
+  if (!j) {
+    main.innerHTML = `
+      <div class="wrap error-page">
+        <p class="eyebrow">Not found</p>
+        <h2 style="margin-bottom:18px;">We couldn't find that entry.</h2>
+        <p class="lede">It may have been unpublished or the link is out of date.</p>
+        <a href="journal.html" class="btn mt-lg">Back to the journal</a>
+      </div>`;
+    return;
+  }
+
+  document.getElementById("page-title").textContent = `${j.title} — Bookhearth`;
+  const others = entries.filter(x => x.slug !== j.slug).slice(0, 2);
+
+  main.innerHTML = `
+    <article class="story-body wrap">
+      <p class="eyebrow" style="margin-bottom: 6px;">${formatDate(j.date)}</p>
+      <h1 style="font-size: clamp(1.8rem,4vw,2.6rem); margin-bottom: 30px;">${j.title}</h1>
+      ${paragraphsToHTML(j.body)}
+    </article>
+
+    <div class="wrap">
+      <div class="share-row" data-share-row style="padding: 20px 0 40px;"></div>
+
+      ${others.length ? `
+      <section style="padding: 20px 0 40px; border-top: 1px solid var(--line);">
+        <p class="eyebrow">More from the journal</p>
+        <h2 style="margin-bottom: 30px;">Other entries</h2>
+        <div class="row-list">
+          ${others.map(o => `
+            <a class="row-item" href="journal-entry.html?slug=${o.slug}" style="grid-template-columns: 1fr auto;">
+              <div>
+                <div class="meta">${formatDate(o.date)}</div>
+                <h3>${o.title}</h3>
+                <p class="excerpt">${o.body.slice(0, 140)}${o.body.length > 140 ? "…" : ""}</p>
+              </div>
+              <span class="arrow">&#8594;</span>
+            </a>
+          `).join("")}
+        </div>
+      </section>` : ""}
+    </div>
+  `;
+
+  renderShareRow(j.title);
+});
+</script>
+</body>
+</html>

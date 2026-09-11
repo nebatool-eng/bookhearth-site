@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Journal — Bookhearth</title>
+<meta name="description" content="Short, personal journal entries from Bookhearth.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main>
+  <section class="page-head wrap">
+    <p class="eyebrow" id="page-eyebrow"></p>
+    <h1 id="page-title-text"></h1>
+    <p class="lede mt-lg" id="page-subtext"></p>
+  </section>
+
+  <section class="wrap" style="padding-top:0;">
+    <div class="row-list" id="journal-list"></div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+
+<script src="loader.js"></script>
+<script src="script.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", async () => {
+  const [entries, settings] = await Promise.all([getJournal(), getSettings()]);
+  if (settings) {
+    document.getElementById("page-eyebrow").textContent = settings.journalPageEyebrow || "Journal";
+    document.getElementById("page-title-text").textContent = settings.journalPageTitle || "";
+    document.getElementById("page-subtext").textContent = settings.journalPageSubtext || "";
+  }
+  const mount = document.getElementById("journal-list");
+  if (!entries.length) { showEmptyState(mount, "No journal entries published yet."); return; }
+
+  const sorted = [...entries].sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+  mount.innerHTML = sorted.map(j => `
+    <a class="row-item" href="journal-entry.html?slug=${j.slug}" style="grid-template-columns: 96px 1fr auto;">
+      <div class="thumb" style="background: linear-gradient(160deg,#AD8A44,#8A6E52); display:flex; align-items:center; justify-content:center; color:#fff; font-family: var(--serif); font-style:italic;"></div>
+      <div>
+        <div class="meta">${formatDate(j.date)}</div>
+        <h3>${j.title}</h3>
+        <p class="excerpt">${j.body.slice(0, 160)}${j.body.length > 160 ? "…" : ""}</p>
+      </div>
+      <span class="arrow">&#8594;</span>
+    </a>
+  `).join("");
+});
+</script>
+</body>
+</html>
