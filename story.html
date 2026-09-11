@@ -84,14 +84,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         </div>
       </section>` : ""}
 
-      <div class="share-row" style="padding-bottom: 60px;">
-        <a href="#" class="btn ghost">Share on X</a>
-        <a href="#" class="btn ghost">Share by email</a>
-      </div>
+      <div class="share-row" data-share-row style="padding-bottom: 60px;"></div>
     </div>
   `;
 
   initFontSizeControl();
+  renderShareRow(s.title);
   const bm = document.getElementById("bookmark-btn");
   bm.addEventListener("click", () => {
     const active = bm.innerHTML === "&#9829;";

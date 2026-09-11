@@ -13,9 +13,9 @@
 
 <main>
   <section class="page-head wrap">
-    <p class="eyebrow">Book Reviews</p>
-    <h1>Books, reviewed like you're already a friend.</h1>
-    <p class="lede mt-lg">Every review includes what worked, what didn't, and the line I underlined twice.</p>
+    <p class="eyebrow" id="page-eyebrow"></p>
+    <h1 id="page-title-text"></h1>
+    <p class="lede mt-lg" id="page-subtext"></p>
   </section>
 
   <section class="wrap" style="padding-top:0;">
@@ -29,12 +29,17 @@
 <script src="script.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", async () => {
+  const [reviews, settings] = await Promise.all([getReviews(), getSettings()]);
+  if (settings) {
+    document.getElementById("page-eyebrow").textContent = settings.reviewsPageEyebrow || "Book Reviews";
+    document.getElementById("page-title-text").textContent = settings.reviewsPageTitle || "";
+    document.getElementById("page-subtext").textContent = settings.reviewsPageSubtext || "";
+  }
   const mount = document.getElementById("reviews-list");
-  const reviews = await getReviews();
   if (!reviews.length) { showEmptyState(mount, "No reviews published yet. Check back soon."); return; }
   mount.innerHTML = reviews.map(r => `
     <a class="row-item" href="review.html?slug=${r.slug}">
-      <div class="thumb" style="background: ${r.coverColor};"></div>
+      <div class="thumb" style="${coverStyle(r)}"></div>
       <div>
         <div class="meta">${r.genre} · ${r.readingTime} · ${starString(r.rating)}</div>
         <h3>${r.title} <span style="color: var(--brown); font-size: 0.9rem; font-weight: 400;">— ${r.author}</span></h3>

@@ -51,6 +51,7 @@
     <div class="shelf">
       <a class="spine" href="reviews.html"><span>Book Reviews</span></a>
       <a class="spine" href="stories.html"><span>Stories</span></a>
+      <a class="spine" href="journal.html"><span>Journal</span></a>
       <a class="spine" href="reading-lists.html"><span>Reading Lists</span></a>
     </div>
   </section>
@@ -64,6 +65,17 @@
       <a href="stories.html" class="more-link">All stories</a>
     </div>
     <div class="row-list" id="home-stories"></div>
+  </section>
+
+  <section class="wrap">
+    <div class="row-head">
+      <div>
+        <p class="eyebrow">From the journal</p>
+        <h2>Recent entries</h2>
+      </div>
+      <a href="journal.html" class="more-link">All entries</a>
+    </div>
+    <div class="row-list" id="home-journal"></div>
   </section>
 
   <section class="wrap">
@@ -95,7 +107,7 @@
 </script>
 <script>
 document.addEventListener("DOMContentLoaded", async () => {
-  const [settings, reviews, stories] = await Promise.all([getSettings(), getReviews(), getStories()]);
+  const [settings, reviews, stories, journal] = await Promise.all([getSettings(), getReviews(), getStories(), getJournal()]);
 
   if (settings) {
     document.getElementById("hero-eyebrow").textContent = settings.heroEyebrow || "";
@@ -109,7 +121,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       document.getElementById("currently-reading-section").style.display = "";
       document.getElementById("currently-reading").innerHTML = `
         <a class="row-item" href="review.html?slug=${cr.slug}">
-          <div class="thumb" style="background: ${cr.coverColor};"></div>
+          <div class="thumb" style="${coverStyle(cr)}"></div>
           <div>
             <div class="meta">${cr.genre}</div>
             <h3>${cr.title}</h3>
@@ -124,7 +136,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       document.getElementById("featured-review-section").style.display = "";
       document.getElementById("featured-intro").textContent = settings.featuredIntro || "";
       document.getElementById("featured-review").innerHTML = `
-        <div class="cover" style="background: ${featured.coverColor};"></div>
+        <div class="cover" style="${coverStyle(featured)}"></div>
         <div>
           <div class="rating">${starString(featured.rating)}</div>
           <h3 style="font-size: 1.8rem; margin-bottom: 10px;">${featured.title} — ${featured.author}</h3>
@@ -151,12 +163,29 @@ document.addEventListener("DOMContentLoaded", async () => {
     showEmptyState(storyMount, "No stories published yet.");
   }
 
+  const journalMount = document.getElementById("home-journal");
+  if (journal.length) {
+    const sorted = [...journal].sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+    journalMount.innerHTML = sorted.slice(0, 2).map(j => `
+      <a class="row-item" href="journal-entry.html?slug=${j.slug}" style="grid-template-columns: 1fr auto;">
+        <div>
+          <div class="meta">${formatDate(j.date)}</div>
+          <h3>${j.title}</h3>
+          <p class="excerpt">${j.body.slice(0, 160)}${j.body.length > 160 ? "…" : ""}</p>
+        </div>
+        <span class="arrow">&#8594;</span>
+      </a>
+    `).join("");
+  } else {
+    showEmptyState(journalMount, "No journal entries published yet.");
+  }
+
   const reviewMount = document.getElementById("home-more-reviews");
   const others = reviews.filter(r => r.slug !== (settings?.featuredReviewSlug)).slice(0, 3);
   if (others.length) {
     reviewMount.innerHTML = others.map(r => `
       <a class="row-item" href="review.html?slug=${r.slug}">
-        <div class="thumb" style="background: ${r.coverColor};"></div>
+        <div class="thumb" style="${coverStyle(r)}"></div>
         <div>
           <div class="meta">${r.genre} · ${r.readingTime}</div>
           <h3>${r.title} <span style="color: var(--brown); font-size: 0.9rem; font-weight: 400;">— ${r.author}</span></h3>

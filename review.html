@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   main.innerHTML = `
     <div class="wrap">
       <div class="review-hero">
-        <div class="cover" style="background: ${r.coverColor}; aspect-ratio:2/3;"></div>
+        <div class="cover" style="${coverStyle(r)} aspect-ratio:2/3;"></div>
         <div>
           <p class="eyebrow">${r.genre}</p>
           <h1 style="font-size: clamp(2rem,4vw,3rem);">${r.title}</h1>
@@ -54,10 +54,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             <div><dt>Genre</dt><dd>${r.genre}</dd></div>
             <div><dt>Reading time</dt><dd>${r.readingTime}</dd></div>
           </dl>
-          <div class="share-row">
-            <a href="#" class="btn ghost">Share on X</a>
-            <a href="#" class="btn ghost">Share by email</a>
-          </div>
+          <div class="share-row" data-share-row></div>
         </div>
       </div>
     </div>
@@ -81,7 +78,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       <div class="row-list">
         ${others.map(o => `
           <a class="row-item" href="review.html?slug=${o.slug}">
-            <div class="thumb" style="background: ${o.coverColor};"></div>
+            <div class="thumb" style="${coverStyle(o)}"></div>
             <div>
               <div class="meta">${o.genre} · ${o.readingTime}</div>
               <h3>${o.title}</h3>
@@ -93,6 +90,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       </div>
     </section>` : ""}
   `;
+
+  renderShareRow(r.title);
 });
 </script>
 </body>

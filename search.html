@@ -13,18 +13,19 @@
 
 <main>
   <section class="page-head wrap">
-    <p class="eyebrow">Search</p>
-    <h1>What are you looking for?</h1>
+    <p class="eyebrow" id="page-eyebrow">Search</p>
+    <h1 id="page-title-text">What are you looking for?</h1>
   </section>
 
   <section class="wrap" style="padding-top:0;">
     <div class="search-box">
-      <input type="text" id="search-input" placeholder="Search stories, reviews, reading lists...">
+      <input type="text" id="search-input" placeholder="Search stories, reviews, journal entries, reading lists...">
     </div>
     <div class="filter-row">
       <button class="filter-chip active" data-filter="all">All</button>
       <button class="filter-chip" data-filter="Review">Reviews</button>
       <button class="filter-chip" data-filter="Story">Stories</button>
+      <button class="filter-chip" data-filter="Journal">Journal</button>
       <button class="filter-chip" data-filter="Reading List">Reading Lists</button>
     </div>
     <div class="row-list" id="search-results"></div>
@@ -39,5 +40,14 @@
 
 <script src="loader.js"></script>
 <script src="script.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", async () => {
+  const settings = await getSettings();
+  if (settings) {
+    document.getElementById("page-eyebrow").textContent = settings.searchPageEyebrow || "Search";
+    document.getElementById("page-title-text").textContent = settings.searchPageTitle || "";
+  }
+});
+</script>
 </body>
 </html>

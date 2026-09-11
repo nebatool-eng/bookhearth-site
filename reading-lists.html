@@ -13,9 +13,9 @@
 
 <main>
   <section class="page-head wrap">
-    <p class="eyebrow">Reading Lists</p>
-    <h1>Shelves, sorted by mood.</h1>
-    <p class="lede mt-lg">Curated lists for whatever kind of reading week you're having.</p>
+    <p class="eyebrow" id="page-eyebrow"></p>
+    <h1 id="page-title-text"></h1>
+    <p class="lede mt-lg" id="page-subtext"></p>
   </section>
 
   <section class="wrap" style="padding-top:0;">
@@ -33,7 +33,12 @@
 <script src="script.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", async () => {
-  const lists = await getReadingLists();
+  const [lists, settings] = await Promise.all([getReadingLists(), getSettings()]);
+  if (settings) {
+    document.getElementById("page-eyebrow").textContent = settings.readingListsPageEyebrow || "Reading Lists";
+    document.getElementById("page-title-text").textContent = settings.readingListsPageTitle || "";
+    document.getElementById("page-subtext").textContent = settings.readingListsPageSubtext || "";
+  }
   const shelf = document.getElementById("lists-shelf");
   const detail = document.getElementById("lists-detail");
 

@@ -25,7 +25,8 @@ collections:
               - {label: "Genre", name: "genre", widget: "string"}
               - {label: "Reading time label", name: "readingTime", widget: "string", default: "5 min read"}
               - {label: "Rating (1-5 stars)", name: "rating", widget: "number", value_type: "int", min: 1, max: 5, default: 4}
-              - {label: "Cover color", name: "coverColor", widget: "color", default: "#37473B", hint: "Used until you add real cover images"}
+              - {label: "Cover color (fallback if no image)", name: "coverColor", widget: "color", default: "#37473B"}
+              - {label: "Cover image (optional — upload a real book cover)", name: "coverImage", widget: "image", required: false, hint: "If you upload one, it replaces the color block everywhere"}
               - {label: "Short excerpt (shown in lists)", name: "excerpt", widget: "text"}
               - {label: "Full review text", name: "body", widget: "text", hint: "Leave one blank line between paragraphs"}
               - {label: "Pull quote (optional)", name: "pullQuote", widget: "string", required: false}
@@ -70,6 +71,23 @@ collections:
               - {label: "Color", name: "color", widget: "select", options: ["forest", "rust", "brown", "gold", "ink"]}
               - {label: "Description", name: "description", widget: "text", required: false}
 
+  - name: "journal"
+    label: "Journal"
+    files:
+      - name: "journal"
+        label: "All Journal Entries"
+        file: "content/journal.json"
+        fields:
+          - label: "Journal Entries"
+            name: "journal"
+            widget: "list"
+            summary: "{{title}} ({{date}})"
+            fields:
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "Web address slug (lowercase, dashes, no spaces)", name: "slug", widget: "string", hint: "e.g. a-slow-week — must be unique"}
+              - {label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false}
+              - {label: "Entry text", name: "body", widget: "text", hint: "Leave one blank line between paragraphs"}
+
   - name: "settings"
     label: "Site Settings"
     files:
@@ -77,6 +95,8 @@ collections:
         label: "Home Page & About"
         file: "content/settings.json"
         fields:
+          - {label: "Site name", name: "siteName", widget: "string", default: "Bookhearth"}
+          - {label: "Logo image (optional — replaces the text logo)", name: "logoImage", widget: "image", required: false}
           - {label: "Hero eyebrow text", name: "heroEyebrow", widget: "string"}
           - {label: "Hero headline", name: "heroTitle", widget: "text", hint: "Line breaks are kept as written"}
           - {label: "Hero subtext", name: "heroLede", widget: "text"}
@@ -88,3 +108,20 @@ collections:
           - {label: "Featured Review — intro text", name: "featuredIntro", widget: "string"}
           - {label: "About page title", name: "aboutTitle", widget: "string"}
           - {label: "About page body", name: "aboutBody", widget: "text", hint: "Leave one blank line between paragraphs"}
+          - {label: "Reviews page — eyebrow", name: "reviewsPageEyebrow", widget: "string"}
+          - {label: "Reviews page — title", name: "reviewsPageTitle", widget: "string"}
+          - {label: "Reviews page — subtext", name: "reviewsPageSubtext", widget: "text"}
+          - {label: "Stories page — eyebrow", name: "storiesPageEyebrow", widget: "string"}
+          - {label: "Stories page — title", name: "storiesPageTitle", widget: "string"}
+          - {label: "Stories page — subtext", name: "storiesPageSubtext", widget: "text"}
+          - {label: "Journal page — eyebrow", name: "journalPageEyebrow", widget: "string"}
+          - {label: "Journal page — title", name: "journalPageTitle", widget: "string"}
+          - {label: "Journal page — subtext", name: "journalPageSubtext", widget: "text"}
+          - {label: "Reading Lists page — eyebrow", name: "readingListsPageEyebrow", widget: "string"}
+          - {label: "Reading Lists page — title", name: "readingListsPageTitle", widget: "string"}
+          - {label: "Reading Lists page — subtext", name: "readingListsPageSubtext", widget: "text"}
+          - {label: "Contact page — eyebrow", name: "contactPageEyebrow", widget: "string"}
+          - {label: "Contact page — title", name: "contactPageTitle", widget: "string"}
+          - {label: "Contact page — intro text", name: "contactPageIntro", widget: "text"}
+          - {label: "Search page — eyebrow", name: "searchPageEyebrow", widget: "string"}
+          - {label: "Search page — title", name: "searchPageTitle", widget: "string"}

@@ -13,9 +13,9 @@
 
 <main>
   <section class="page-head wrap">
-    <p class="eyebrow">Stories</p>
-    <h1>Original fiction, published slightly braver than feels comfortable.</h1>
-    <p class="lede mt-lg">Short stories and flash fiction, with a distraction-free reading mode for each.</p>
+    <p class="eyebrow" id="page-eyebrow"></p>
+    <h1 id="page-title-text"></h1>
+    <p class="lede mt-lg" id="page-subtext"></p>
   </section>
 
   <section class="wrap" style="padding-top:0;">
@@ -29,8 +29,13 @@
 <script src="script.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", async () => {
+  const [stories, settings] = await Promise.all([getStories(), getSettings()]);
+  if (settings) {
+    document.getElementById("page-eyebrow").textContent = settings.storiesPageEyebrow || "Stories";
+    document.getElementById("page-title-text").textContent = settings.storiesPageTitle || "";
+    document.getElementById("page-subtext").textContent = settings.storiesPageSubtext || "";
+  }
   const mount = document.getElementById("stories-list");
-  const stories = await getStories();
   if (!stories.length) { showEmptyState(mount, "No stories published yet. Check back soon."); return; }
   mount.innerHTML = stories.map(s => `
     <a class="row-item" href="story.html?slug=${s.slug}">
