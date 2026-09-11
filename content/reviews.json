@@ -1,49 +1,63 @@
 {
   "reviews": [
     {
-      "slug": "the-bone-season",
-      "title": "The Bone Season",
-      "author": "Samantha Shannon",
-      "genre": "Fantasy",
-      "readingTime": "6 min read",
-      "rating": 4,
-      "coverColor": "#37473B",
-      "excerpt": "A clairvoyant smuggler in a hidden London learns that the empire she serves and the one that hunts her are closer than she thinks.",
-      "body": "Paige Mahoney is a dreamwalker, which in most cities would make her a fortune teller and in Scion London makes her a criminal. She works for a crime syndicate of clairvoyants hidden under the city, running jobs that keep her one step ahead of an authoritarian government that considers people like her a public health risk to be quietly disappeared.\n\nWhat I didn't expect from a book with this much worldbuilding is how fast it moves. Shannon front-loads an enormous amount of invented vocabulary and mostly earns the trust that you'll catch up. I didn't, not on the first fifty pages, and I loved it anyway.\n\nThe back half of the book takes a hard swerve into a walled colony where the real antagonists live, and the tonal shift is the book's biggest risk. It works, mostly because Paige never stops being a person who solves problems by being stubborn rather than special. She's not the chosen one. She's just the one who didn't leave.",
-      "pullQuote": "The city is a rumor that keeps almost coming true.",
-      "pros": ["A magic system with real internal logic and stakes", "A protagonist who is capable without being invincible", "Worldbuilding that rewards a second read"],
-      "cons": ["The first act asks a lot of patience from new readers", "A romance subplot that arrives before it's earned"],
-      "recommendation": "Read this if you liked the political texture of Six of Crows more than its romance, or if you've ever wished a fantasy novel would just trust you to keep up. Give it fifty pages before deciding — the payoff is worth the confusion."
+      "excerpt": "This book is a true representation of impeccable art by Oscar Wilde. No doubt he was a lord of words. Every line and every passage in ",
+      "body": "This book is a true representation of impeccable art by Oscar Wilde. I am speechless. There is no doubt that he was a master of words. Every line and every passage in this book is worth highlighting. It is the kind of book that tells you something about yourself, a book that gives you food for thought and something to ponder. At least, it gave me a lot to think about. As Oscar himself said, there is a moral lesson in his book.\n\nI don’t know how anyone could have the heart to criticize such a beautiful piece of art. If anyone thinks the book is immoral, perhaps it is because it shows them their own shame.\n\nThe plot is intriguing and suspenseful. The writing style is wonderfully lyrical and has a sensual depth to it. The story offers fascinating and thought provoking ideas and perspectives on life. It carries a deep, beautiful, and meaningful message. The words, the story, and the lesson have affected me in the most positive way.\n\nDorian Gray, the central character of the story, possesses a beauty so monumental that it leaves every man stunned and every woman falling in love with him. A talented painter, Basil, paints him in the most genuine portrait of art, and later becomes a worshipper of his beauty. Another fascinating character in the story is Lord Henry Wotton, who is the very definition of hedonism, a person with fascinating, yet at the same time dangerous, views on life. He has a bad influence on all his friends, even though he is not necessarily a bad person himself. He is Dorian’s best friend and his greatest influence. At one point, Henry says to Dorian, “I represent to you all the sins you have never had the courage to commit.”\n\nDorian begins a journey of curiosity, vanity, and hypocrisy and trades his soul to the devil in return for a lifetime of youth and beauty, knowing that the portrait will bear the brunt of his sins.\n\nI tried to preserve every word and every line written by Oscar Wilde in my mind, yet I fear that some of it might slip away from my memory. That is why I found myself highlighting almost every passage in the book.\n\nIf one must read only one book in their entire lifetime, I would suggest they read \"The Picture of Dorian Gray\".",
+      "genre": "Classics, Fiction",
+      "pros": [],
+      "author": "Oscar Wilde",
+      "slug": "The-Picture-of-Dorian-Gray",
+      "coverColor": "#473e37",
+      "cons": [],
+      "pullQuote": "“Experience is merely the name men gave to their mistakes.”",
+      "title": "The Picture of Dorian Gray",
+      "readingTime": "3 min read",
+      "recommendation": "Read this if you love beautifully written stories that make you question morality, desire, and human nature. Come for the lyrical prose and stay for the unforgettable characters. Give it time to unfold, because the deeper you go, the more there is to think about.",
+      "rating": 1
     },
     {
-      "slug": "piranesi",
-      "title": "Piranesi",
-      "author": "Susanna Clarke",
-      "genre": "Literary Fantasy",
-      "readingTime": "5 min read",
-      "rating": 5,
-      "coverColor": "#8A6E52",
       "excerpt": "A man who lives inside an endless, flooding House keeps a diary of tides and statues — until the diary starts asking questions he can't answer.",
       "body": "Piranesi lives alone in a vast House of infinite halls, tides, and statues, and he is, by his own account, perfectly content. He catalogues the House with the devotion of a scientist and the tenderness of someone in love with his own solitude.\n\nThe novel's quiet trick is how long it lets you sit in that contentment before the cracks show. Someone else has been in the House. Someone else remembers a world before it. The unraveling is gentle, almost reluctant, which makes it more unsettling than a louder mystery ever could be.\n\nThis is a book about memory, isolation, and how a mind can build a home out of whatever it's given, even captivity. It's short, strange, and stayed with me for weeks after I finished it.",
+      "genre": "Literary Fantasy",
+      "pros": [
+        "A completely singular voice and premise",
+        "Emotionally devastating without a single raised voice",
+        "Rewards close, patient reading"
+      ],
+      "author": "Susanna Clarke",
+      "slug": "piranesi",
+      "coverColor": "#8A6E52",
+      "cons": [
+        "Very slow to reveal its plot — needs trust up front",
+        "Some readers may want more resolution than it gives"
+      ],
       "pullQuote": "The Beauty of the House is immeasurable; its Kindness infinite.",
-      "pros": ["A completely singular voice and premise", "Emotionally devastating without a single raised voice", "Rewards close, patient reading"],
-      "cons": ["Very slow to reveal its plot — needs trust up front", "Some readers may want more resolution than it gives"],
-      "recommendation": "Perfect for a quiet weekend where you can read it in one or two sittings. Don't look up spoilers first — the not-knowing is the whole experience."
+      "title": "Piranesi",
+      "readingTime": "5 min read",
+      "recommendation": "Perfect for a quiet weekend where you can read it in one or two sittings. Don't look up spoilers first — the not-knowing is the whole experience.",
+      "rating": 5
     },
     {
-      "slug": "klara-and-the-sun",
-      "title": "Klara and the Sun",
-      "author": "Kazuo Ishiguro",
-      "genre": "Literary Fiction",
-      "readingTime": "7 min read",
-      "rating": 4,
-      "coverColor": "#A24E1F",
       "excerpt": "A solar-powered companion observes a family from the corner of a room, and slowly teaches us what devotion looks like from the outside.",
       "body": "Klara is an Artificial Friend, built to be chosen from a shop window by a lonely child. Ishiguro tells the entire novel through her eyes, and her limited, literal understanding of the world becomes the book's quiet engine — she notices everything and understands almost none of it correctly, and neither, really, do we.\n\nThe family she joins is hiding something, and the slow reveal of what it costs to raise a child in this particular version of the future is where the book earns its ache. Klara's devotion is total and uncomplicated, which makes the humans around her look messier by comparison.\n\nIt's a smaller, quieter book than Never Let Me Go, but it's working the same nerve: what do we owe the things we build to love us.",
+      "genre": "Literary Fiction",
+      "pros": [
+        "A genuinely original narrative voice",
+        "Builds emotional weight without melodrama",
+        "Says a lot with very restrained prose"
+      ],
+      "author": "Kazuo Ishiguro",
+      "slug": "klara-and-the-sun",
+      "coverColor": "#A24E1F",
+      "cons": [
+        "Pacing is deliberately slow in the middle third",
+        "Some world-building details stay frustratingly vague"
+      ],
       "pullQuote": "I believe I have many feelings. The more I observe, the more feelings become available to me.",
-      "pros": ["A genuinely original narrative voice", "Builds emotional weight without melodrama", "Says a lot with very restrained prose"],
-      "cons": ["Pacing is deliberately slow in the middle third", "Some world-building details stay frustratingly vague"],
-      "recommendation": "Good for readers who liked the emotional restraint of Never Let Me Go. Go in patient — the ending needs the slow build to land."
+      "title": "Klara and the Sun",
+      "readingTime": "7 min read",
+      "recommendation": "Good for readers who liked the emotional restraint of Never Let Me Go. Go in patient — the ending needs the slow build to land.",
+      "rating": 4
     }
   ]
 }
