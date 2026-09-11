@@ -4,6 +4,7 @@ const NAV_LINKS = [
   { href: "index.html", label: "Home" },
   { href: "reviews.html", label: "Book Reviews" },
   { href: "stories.html", label: "Stories" },
+  { href: "journal.html", label: "Journal" },
   { href: "reading-lists.html", label: "Reading Lists" },
   { href: "about.html", label: "About" },
 ];
@@ -13,7 +14,7 @@ function currentPage() {
   return p === "" ? "index.html" : p;
 }
 
-function renderHeader() {
+function renderHeader(settings) {
   const mount = document.getElementById("site-header");
   if (!mount) return;
   const here = currentPage();
@@ -21,9 +22,14 @@ function renderHeader() {
     `<a href="${l.href}" ${l.href === here ? 'aria-current="page"' : ''}>${l.label}</a>`
   ).join("");
 
+  const siteName = settings?.siteName || "Bookhearth";
+  const logoHTML = settings?.logoImage
+    ? `<img src="${settings.logoImage}" alt="${siteName}" style="height:36px; width:auto;">`
+    : `<span class="mark">${siteName.charAt(0)}</span>${siteName.slice(1)}`;
+
   mount.innerHTML = `
     <div class="header-inner">
-      <a href="index.html" class="logo"><span class="mark">B</span>ookhearth</a>
+      <a href="index.html" class="logo">${logoHTML}</a>
       <nav class="primary" id="primary-nav">${links}</nav>
       <div class="header-tools">
         <a class="icon-btn" href="search.html" aria-label="Search">
@@ -44,21 +50,23 @@ function renderHeader() {
   });
 }
 
-function renderFooter() {
+function renderFooter(settings) {
   const mount = document.getElementById("site-footer");
   if (!mount) return;
+  const siteName = settings?.siteName || "Bookhearth";
   mount.innerHTML = `
     <div class="wrap">
       <div class="footer-grid">
         <div>
-          <h4>Bookhearth</h4>
-          <p>A home for readers and writers. Honest reviews, original stories, and curated reading lists.</p>
+          <h4>${siteName}</h4>
+          <p>A home for readers and writers. Honest reviews, original stories, journal entries, and curated reading lists.</p>
         </div>
         <div>
           <h4>Read</h4>
           <ul>
             <li><a href="reviews.html">Book Reviews</a></li>
             <li><a href="stories.html">Stories</a></li>
+            <li><a href="journal.html">Journal</a></li>
             <li><a href="reading-lists.html">Reading Lists</a></li>
           </ul>
         </div>
@@ -72,7 +80,7 @@ function renderFooter() {
         </div>
       </div>
       <div class="footer-bottom">
-        <span>&copy; ${new Date().getFullYear()} Bookhearth. Built for slow reading.</span>
+        <span>&copy; ${new Date().getFullYear()} ${siteName}. Built for slow reading.</span>
         <span>A home for readers and writers.</span>
       </div>
     </div>
@@ -111,6 +119,21 @@ function initFontSizeControl() {
   dec.addEventListener("click", () => { size = Math.max(size - 0.12, 0.95); apply(); });
 }
 
+// Renders "Share by email" and "Share on Facebook" links for a detail page (review/story/journal entry).
+function renderShareRow(title) {
+  const mounts = document.querySelectorAll("[data-share-row]");
+  if (!mounts.length) return;
+  const url = window.location.href;
+  const mailto = `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent("Thought you'd like this: " + url)}`;
+  const fb = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+  mounts.forEach(mount => {
+    mount.innerHTML = `
+      <a href="${mailto}" class="btn ghost">Share by email</a>
+      <a href="${fb}" class="btn ghost" target="_blank" rel="noopener">Share on Facebook</a>
+    `;
+  });
+}
+
 async function initSearch() {
   const input = document.getElementById("search-input");
   if (!input) return;
@@ -119,11 +142,14 @@ async function initSearch() {
   const chips = document.querySelectorAll(".filter-chip");
   let activeFilter = "all";
 
-  const [reviews, stories, readingLists] = await Promise.all([getReviews(), getStories(), getReadingLists()]);
+  const [reviews, stories, journal, readingLists] = await Promise.all([
+    getReviews(), getStories(), getJournal(), getReadingLists()
+  ]);
 
   const allItems = [
     ...reviews.map(r => ({ type: "Review", title: r.title, excerpt: r.excerpt, href: `review.html?slug=${r.slug}` })),
     ...stories.map(s => ({ type: "Story", title: s.title, excerpt: s.excerpt, href: `story.html?slug=${s.slug}` })),
+    ...journal.map(j => ({ type: "Journal", title: j.title, excerpt: j.body.slice(0, 140), href: `journal-entry.html?slug=${j.slug}` })),
     ...readingLists.map(l => ({ type: "Reading List", title: l.title, excerpt: l.description || l.count, href: "reading-lists.html" })),
   ];
 
@@ -162,20 +188,40 @@ async function initSearch() {
   render();
 }
 
+// Real submission via Netlify Forms (works once the site is deployed on Netlify).
+// The person sets which email address receives these in their own Netlify dashboard
+// under Forms → Form notifications — no code needed for that part.
 function initContactForm() {
   const form = document.getElementById("contact-form");
   if (!form) return;
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     const note = document.getElementById("contact-note");
-    note.textContent = "This form is for preview only — connect it to your email service to receive messages.";
-    note.style.display = "block";
+    const data = new FormData(form);
+
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams(data).toString(),
+    })
+      .then(() => {
+        note.textContent = "Thanks — your message has been sent.";
+        note.style.color = "var(--forest)";
+        note.style.display = "block";
+        form.reset();
+      })
+      .catch(() => {
+        note.textContent = "Something went wrong sending that. Please try again in a moment.";
+        note.style.color = "var(--rust)";
+        note.style.display = "block";
+      });
   });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  renderHeader();
-  renderFooter();
+document.addEventListener("DOMContentLoaded", async () => {
+  const settings = await getSettings();
+  renderHeader(settings);
+  renderFooter(settings);
   initDarkMode();
   initReadingProgress();
   initFontSizeControl();

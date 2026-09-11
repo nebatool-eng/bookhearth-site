@@ -15,6 +15,7 @@ async function loadContent(path) {
 
 function getReviews() { return loadContent("content/reviews.json").then(d => d?.reviews || []); }
 function getStories() { return loadContent("content/stories.json").then(d => d?.stories || []); }
+function getJournal() { return loadContent("content/journal.json").then(d => d?.journal || []); }
 function getReadingLists() { return loadContent("content/reading-lists.json").then(d => d?.readingLists || []); }
 function getSettings() { return loadContent("content/settings.json"); }
 
@@ -39,6 +40,21 @@ function escapeHTML(str) {
 
 function starString(rating) {
   return "&#9733;".repeat(rating) + "&#9734;".repeat(5 - rating);
+}
+
+function formatDate(isoDate) {
+  if (!isoDate) return "";
+  const d = new Date(isoDate + "T00:00:00");
+  if (isNaN(d)) return isoDate;
+  return d.toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
+}
+
+// Returns an inline CSS style string: a real cover photo if uploaded, otherwise the fallback color.
+function coverStyle(item) {
+  if (item.coverImage) {
+    return `background-image:url('${item.coverImage}'); background-size:cover; background-position:center;`;
+  }
+  return `background:${item.coverColor || "#37473B"};`;
 }
 
 function showEmptyState(mount, message) {
