@@ -1,13 +1,40 @@
 {
-  "quoteAuthor": "Marcus Tullius Cicero",
-  "aboutTitle": "I read the way some people pray.",
-  "heroEyebrow": "A personal reading & writing space by Nida",
-  "aboutBody": "I started keeping a reading log years before I called myself a writer, mostly because I kept forgetting how books ended. The log turned into margin notes, the margin notes turned into essays nobody asked for, and eventually I ran out of room in my own notebooks. Bookhearth is where the overflow lives.\n\nThis isn't a place built for hot takes or hauls. It's built for the specific, quiet pleasure of a sentence that's doing more work than it looks like — the kind you read twice, once for the meaning and once for the craft. I write book reviews the way I'd talk about a book with a friend who hasn't read it yet: honestly, a little biased, and always with spoilers clearly marked.\n\nThe stories and flash fiction here are mine too — first drafts of a longer career, published slightly braver than feels comfortable.\n\nWhat Bookhearth is for\n\nIt's for the reader who finishes a book and immediately wants to talk about it with someone. It's for the writer who needs proof that everyone's first draft is a little embarrassing. And it's for anyone who has ever rearranged a bookshelf by color, then by author, then by how much they loved each spine — you'll fit right in.\n\nA short, honest bio\n\nI've read in libraries, waiting rooms, and at least one wedding I probably should have been paying more attention to. I write in the mornings, edit in the evenings, and keep a stack of currently reading books that is, by any reasonable measure, out of control. Bookhearth is where all of it gets put to use.",
-  "featuredReviewSlug": "the-bone-season",
-  "currentlyReadingSlug": "the-age-of-reason",
-  "heroLede": "Bookhearth is a quiet corner of the internet for people who read slowly and always want to know what happens next.",
-  "currentlyReadingNote": "Back in Scion London for a second read, mostly to underline sentences I rushed past the first time.",
-  "quote": "A room without books is like a body without a soul.",
+  "logoImage": "",
+  "siteName": "Bookhearth",
+
+  "heroEyebrow": "A home for readers and writers",
   "heroTitle": "Come in.\nThe kettle's on and there's a chapter waiting.",
-  "featuredIntro": "This month, one book earned the good pen"
+  "heroLede": "Bookhearth is a quiet corner of the internet for people who read slowly and always want to know what happens next.",
+  "quote": "A room without books is like a body without a soul.",
+  "quoteAuthor": "Marcus Tullius Cicero",
+  "currentlyReadingSlug": "the-bone-season",
+  "currentlyReadingNote": "Back in Scion London for a second read, mostly to underline sentences I rushed past the first time.",
+  "featuredReviewSlug": "the-bone-season",
+  "featuredIntro": "This month, one book earned the good pen",
+
+  "aboutTitle": "I read the way some people pray.",
+  "aboutBody": "I started keeping a reading log years before I called myself a writer, mostly because I kept forgetting how books ended. The log turned into margin notes, the margin notes turned into essays nobody asked for, and eventually I ran out of room in my own notebooks. Bookhearth is where the overflow lives.\n\nThis isn't a place built for hot takes or hauls. It's built for the specific, quiet pleasure of a sentence that's doing more work than it looks like — the kind you read twice, once for the meaning and once for the craft. I write book reviews the way I'd talk about a book with a friend who hasn't read it yet: honestly, a little biased, and always with spoilers clearly marked.\n\nThe stories and flash fiction here are mine too — first drafts of a longer career, published slightly braver than feels comfortable.\n\nWhat Bookhearth is for\n\nIt's for the reader who finishes a book and immediately wants to talk about it with someone. It's for the writer who needs proof that everyone's first draft is a little embarrassing. And it's for anyone who has ever rearranged a bookshelf by color, then by author, then by how much they loved each spine — you'll fit right in.\n\nA short, honest bio\n\nI've read in libraries, waiting rooms, and at least one wedding I probably should have been paying more attention to. I write in the mornings, edit in the evenings, and keep a stack of currently reading books that is, by any reasonable measure, out of control. Bookhearth is where all of it gets put to use.",
+
+  "reviewsPageEyebrow": "Book Reviews",
+  "reviewsPageTitle": "Books, reviewed like you're already a friend.",
+  "reviewsPageSubtext": "Every review includes what worked, what didn't, and the line I underlined twice.",
+
+  "storiesPageEyebrow": "Stories",
+  "storiesPageTitle": "Original fiction, published slightly braver than feels comfortable.",
+  "storiesPageSubtext": "Short stories and flash fiction, with a distraction-free reading mode for each.",
+
+  "journalPageEyebrow": "Journal",
+  "journalPageTitle": "Things I'd otherwise only say to myself.",
+  "journalPageSubtext": "Short, unpolished entries \u2014 not essays, just what was true that day.",
+
+  "readingListsPageEyebrow": "Reading Lists",
+  "readingListsPageTitle": "Shelves, sorted by mood.",
+  "readingListsPageSubtext": "Curated lists for whatever kind of reading week you're having.",
+
+  "contactPageEyebrow": "Contact",
+  "contactPageTitle": "Say hello.",
+  "contactPageIntro": "Whether it's a note about a review, a story you want to talk through, or a writing question you're stuck on \u2014 I read every message myself.\n\nFor collaborations, guest essays, or anything else, this is the best way to reach me.",
+
+  "searchPageEyebrow": "Search",
+  "searchPageTitle": "What are you looking for?"
 }
