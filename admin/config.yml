@@ -1,0 +1,90 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# Where uploaded images (e.g. future book covers) get stored and served from
+media_folder: "uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "reviews"
+    label: "Book Reviews"
+    files:
+      - name: "reviews"
+        label: "All Reviews"
+        file: "content/reviews.json"
+        fields:
+          - label: "Reviews"
+            name: "reviews"
+            widget: "list"
+            summary: "{{title}} — {{author}}"
+            fields:
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "Web address slug (lowercase, dashes, no spaces)", name: "slug", widget: "string", hint: "e.g. the-bone-season — must be unique"}
+              - {label: "Author", name: "author", widget: "string"}
+              - {label: "Genre", name: "genre", widget: "string"}
+              - {label: "Reading time label", name: "readingTime", widget: "string", default: "5 min read"}
+              - {label: "Rating (1-5 stars)", name: "rating", widget: "number", value_type: "int", min: 1, max: 5, default: 4}
+              - {label: "Cover color", name: "coverColor", widget: "color", default: "#37473B", hint: "Used until you add real cover images"}
+              - {label: "Short excerpt (shown in lists)", name: "excerpt", widget: "text"}
+              - {label: "Full review text", name: "body", widget: "text", hint: "Leave one blank line between paragraphs"}
+              - {label: "Pull quote (optional)", name: "pullQuote", widget: "string", required: false}
+              - {label: "What worked (one point per line)", name: "pros", widget: "list", required: false}
+              - {label: "What didn't (one point per line)", name: "cons", widget: "list", required: false}
+              - {label: "Final recommendation", name: "recommendation", widget: "text", required: false}
+
+  - name: "stories"
+    label: "Stories"
+    files:
+      - name: "stories"
+        label: "All Stories"
+        file: "content/stories.json"
+        fields:
+          - label: "Stories"
+            name: "stories"
+            widget: "list"
+            summary: "{{title}} ({{kind}})"
+            fields:
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "Web address slug (lowercase, dashes, no spaces)", name: "slug", widget: "string", hint: "e.g. the-last-page-first — must be unique"}
+              - {label: "Type", name: "kind", widget: "select", options: ["Flash Fiction", "Short Story"]}
+              - {label: "Reading time label", name: "readingTime", widget: "string", default: "5 min read"}
+              - {label: "Short excerpt (shown in lists)", name: "excerpt", widget: "text"}
+              - {label: "Full story text", name: "body", widget: "text", hint: "Leave one blank line between paragraphs"}
+
+  - name: "reading-lists"
+    label: "Reading Lists"
+    files:
+      - name: "reading-lists"
+        label: "All Reading Lists"
+        file: "content/reading-lists.json"
+        fields:
+          - label: "Reading Lists"
+            name: "readingLists"
+            widget: "list"
+            summary: "{{title}}"
+            fields:
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "Web address slug (lowercase, dashes, no spaces)", name: "slug", widget: "string"}
+              - {label: "Book count label", name: "count", widget: "string", hint: "e.g. 12 books"}
+              - {label: "Color", name: "color", widget: "select", options: ["forest", "rust", "brown", "gold", "ink"]}
+              - {label: "Description", name: "description", widget: "text", required: false}
+
+  - name: "settings"
+    label: "Site Settings"
+    files:
+      - name: "settings"
+        label: "Home Page & About"
+        file: "content/settings.json"
+        fields:
+          - {label: "Hero eyebrow text", name: "heroEyebrow", widget: "string"}
+          - {label: "Hero headline", name: "heroTitle", widget: "text", hint: "Line breaks are kept as written"}
+          - {label: "Hero subtext", name: "heroLede", widget: "text"}
+          - {label: "Quote text", name: "quote", widget: "string"}
+          - {label: "Quote author", name: "quoteAuthor", widget: "string"}
+          - {label: "Currently Reading — review slug", name: "currentlyReadingSlug", widget: "string", hint: "Copy the exact slug of a review from the Reviews section"}
+          - {label: "Currently Reading — note", name: "currentlyReadingNote", widget: "text"}
+          - {label: "Featured Review — review slug", name: "featuredReviewSlug", widget: "string", hint: "Copy the exact slug of a review from the Reviews section"}
+          - {label: "Featured Review — intro text", name: "featuredIntro", widget: "string"}
+          - {label: "About page title", name: "aboutTitle", widget: "string"}
+          - {label: "About page body", name: "aboutBody", widget: "text", hint: "Leave one blank line between paragraphs"}

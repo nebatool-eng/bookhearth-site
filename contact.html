@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Bookhearth</title>
+<meta name="description" content="Get in touch with Bookhearth.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main>
+  <section class="page-head wrap">
+    <p class="eyebrow">Contact</p>
+    <h1>Say hello.</h1>
+  </section>
+
+  <section class="wrap">
+    <div class="contact-grid">
+      <div class="prose">
+        <p>Whether it's a note about a review, a story you want to talk through, or a writing question you're stuck on — I read every message myself.</p>
+        <p>For collaborations, guest essays, or anything else, this is the best way to reach me.</p>
+      </div>
+
+      <form id="contact-form">
+        <div class="field-row">
+          <label for="name">Name</label>
+          <input id="name" type="text" placeholder="Your name" required>
+        </div>
+        <div class="field-row">
+          <label for="email">Email</label>
+          <input id="email" type="email" placeholder="you@example.com" required>
+        </div>
+        <div class="field-row">
+          <label for="message">Message</label>
+          <textarea id="message" rows="5" placeholder="What's on your mind?" required></textarea>
+        </div>
+        <button type="submit" class="btn">Send message</button>
+        <p id="contact-note" style="display:none; margin-top: 14px; font-size: 0.9rem; color: var(--brown);"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+
+<script src="loader.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

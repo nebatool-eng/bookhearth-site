@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Bookhearth</title>
+<meta name="description" content="The story behind Bookhearth and why it exists for readers and writers.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main>
+  <section class="page-head wrap">
+    <p class="eyebrow">About</p>
+    <h1 id="about-title"></h1>
+  </section>
+
+  <section class="wrap">
+    <div class="prose" id="about-body"></div>
+  </section>
+
+  <section class="wrap">
+    <div class="quote-panel" style="max-width: var(--measure);" id="about-quote"></div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+
+<script src="loader.js"></script>
+<script src="script.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", async () => {
+  const settings = await getSettings();
+  if (!settings) return;
+  document.getElementById("about-title").textContent = settings.aboutTitle || "About";
+  document.getElementById("about-body").innerHTML = paragraphsToHTML(settings.aboutBody);
+  document.getElementById("about-quote").innerHTML = `
+    <blockquote>"${settings.quote || ""}"</blockquote>
+    <cite>— ${settings.quoteAuthor || ""}</cite>
+  `;
+});
+</script>
+</body>
+</html>

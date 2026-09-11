@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="page-title">Review — Bookhearth</title>
+<meta name="description" content="A book review from Bookhearth.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main id="review-main">
+  <div class="wrap"><p style="padding: 60px 0; color: var(--ink-soft);">Loading review…</p></div>
+</main>
+
+<div id="site-footer"></div>
+
+<script src="loader.js"></script>
+<script src="script.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", async () => {
+  const slug = getParam("slug");
+  const reviews = await getReviews();
+  const r = reviews.find(x => x.slug === slug);
+  const main = document.getElementById("review-main");
+
+  if (!r) {
+    main.innerHTML = `
+      <div class="wrap error-page">
+        <p class="eyebrow">Not found</p>
+        <h2 style="margin-bottom:18px;">We couldn't find that review.</h2>
+        <p class="lede">It may have been unpublished or the link is out of date.</p>
+        <a href="reviews.html" class="btn mt-lg">Back to all reviews</a>
+      </div>`;
+    return;
+  }
+
+  document.getElementById("page-title").textContent = `${r.title} — Bookhearth`;
+
+  const others = reviews.filter(x => x.slug !== r.slug).slice(0, 2);
+
+  main.innerHTML = `
+    <div class="wrap">
+      <div class="review-hero">
+        <div class="cover" style="background: ${r.coverColor}; aspect-ratio:2/3;"></div>
+        <div>
+          <p class="eyebrow">${r.genre}</p>
+          <h1 style="font-size: clamp(2rem,4vw,3rem);">${r.title}</h1>
+          <p class="lede" style="margin: 8px 0 0;">by ${r.author}</p>
+          <div class="rating" style="margin-top:18px;">${starString(r.rating)}</div>
+          <dl class="book-facts">
+            <div><dt>Genre</dt><dd>${r.genre}</dd></div>
+            <div><dt>Reading time</dt><dd>${r.readingTime}</dd></div>
+          </dl>
+          <div class="share-row">
+            <a href="#" class="btn ghost">Share on X</a>
+            <a href="#" class="btn ghost">Share by email</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="wrap">
+      <div class="prose">
+        ${paragraphsToHTML(r.body)}
+        ${r.pullQuote ? `<div class="pull-quote">"${r.pullQuote}"</div>` : ""}
+        ${(r.pros?.length || r.cons?.length) ? `
+        <div class="pros-cons">
+          <div class="pros"><h4>What worked</h4><ul>${(r.pros || []).map(p => `<li>${p}</li>`).join("")}</ul></div>
+          <div class="cons"><h4>What didn't</h4><ul>${(r.cons || []).map(c => `<li>${c}</li>`).join("")}</ul></div>
+        </div>` : ""}
+        ${r.recommendation ? `<h3 style="margin: 36px 0 14px;">Final recommendation</h3><p>${r.recommendation}</p>` : ""}
+      </div>
+    </section>
+
+    ${others.length ? `
+    <section class="wrap">
+      <div class="row-head"><div><p class="eyebrow">Keep reading</p><h2>Related reviews</h2></div></div>
+      <div class="row-list">
+        ${others.map(o => `
+          <a class="row-item" href="review.html?slug=${o.slug}">
+            <div class="thumb" style="background: ${o.coverColor};"></div>
+            <div>
+              <div class="meta">${o.genre} · ${o.readingTime}</div>
+              <h3>${o.title}</h3>
+              <p class="excerpt">${o.excerpt}</p>
+            </div>
+            <span class="arrow">&#8594;</span>
+          </a>
+        `).join("")}
+      </div>
+    </section>` : ""}
+  `;
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stories — Bookhearth</title>
+<meta name="description" content="Original short stories and flash fiction, published as they're written.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main>
+  <section class="page-head wrap">
+    <p class="eyebrow">Stories</p>
+    <h1>Original fiction, published slightly braver than feels comfortable.</h1>
+    <p class="lede mt-lg">Short stories and flash fiction, with a distraction-free reading mode for each.</p>
+  </section>
+
+  <section class="wrap" style="padding-top:0;">
+    <div class="row-list" id="stories-list"></div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+
+<script src="loader.js"></script>
+<script src="script.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", async () => {
+  const mount = document.getElementById("stories-list");
+  const stories = await getStories();
+  if (!stories.length) { showEmptyState(mount, "No stories published yet. Check back soon."); return; }
+  mount.innerHTML = stories.map(s => `
+    <a class="row-item" href="story.html?slug=${s.slug}">
+      <div class="thumb" style="background: linear-gradient(160deg,#8A6E52,#5c4936);"></div>
+      <div>
+        <div class="meta">${s.kind} · ${s.readingTime}</div>
+        <h3>${s.title}</h3>
+        <p class="excerpt">${s.excerpt}</p>
+      </div>
+      <span class="arrow">&#8594;</span>
+    </a>
+  `).join("");
+});
+</script>
+</body>
+</html>

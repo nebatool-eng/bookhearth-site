@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="page-title">Story — Bookhearth</title>
+<meta name="description" content="An original story from Bookhearth.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="progress-bar"></div>
+<div id="site-header"></div>
+
+<main id="story-main">
+  <div class="wrap"><p style="padding: 60px 0; color: var(--ink-soft);">Loading story…</p></div>
+</main>
+
+<div id="site-footer"></div>
+
+<script src="loader.js"></script>
+<script src="script.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", async () => {
+  const slug = getParam("slug");
+  const stories = await getStories();
+  const s = stories.find(x => x.slug === slug);
+  const main = document.getElementById("story-main");
+
+  if (!s) {
+    main.innerHTML = `
+      <div class="wrap error-page">
+        <p class="eyebrow">Not found</p>
+        <h2 style="margin-bottom:18px;">We couldn't find that story.</h2>
+        <p class="lede">It may have been unpublished or the link is out of date.</p>
+        <a href="stories.html" class="btn mt-lg">Back to all stories</a>
+      </div>`;
+    return;
+  }
+
+  document.getElementById("page-title").textContent = `${s.title} — Bookhearth`;
+  const others = stories.filter(x => x.slug !== s.slug).slice(0, 2);
+
+  main.innerHTML = `
+    <div class="wrap">
+      <div class="reader-toolbar">
+        <span>${s.kind} · ${s.readingTime}</span>
+        <div class="reader-controls">
+          <button id="font-dec" aria-label="Decrease text size">A-</button>
+          <button id="font-inc" aria-label="Increase text size">A+</button>
+          <button id="bookmark-btn" aria-label="Bookmark this story">&#9825;</button>
+        </div>
+      </div>
+    </div>
+
+    <article class="story-body wrap">
+      <h1 style="font-size: clamp(2rem,4vw,2.8rem); margin-bottom: 6px;">${s.title}</h1>
+      <p style="font-family: var(--sans); color: var(--brown); font-size: 0.95rem; margin-bottom: 40px;">by Bookhearth</p>
+      ${paragraphsToHTML(s.body)}
+    </article>
+
+    <div class="wrap">
+      <div class="story-nav">
+        <a href="stories.html"><span class="dir">Back</span>All stories</a>
+        ${others[0] ? `<a href="story.html?slug=${others[0].slug}" class="next"><span class="dir">Next</span>${others[0].title}</a>` : `<span></span>`}
+      </div>
+
+      ${others.length ? `
+      <section style="padding: 40px 0;">
+        <p class="eyebrow">You might also like</p>
+        <h2 style="margin-bottom: 30px;">Related stories</h2>
+        <div class="row-list">
+          ${others.map(o => `
+            <a class="row-item" href="story.html?slug=${o.slug}">
+              <div class="thumb" style="background: linear-gradient(160deg,#37473B,#263229);"></div>
+              <div>
+                <div class="meta">${o.kind} · ${o.readingTime}</div>
+                <h3>${o.title}</h3>
+                <p class="excerpt">${o.excerpt}</p>
+              </div>
+              <span class="arrow">&#8594;</span>
+            </a>
+          `).join("")}
+        </div>
+      </section>` : ""}
+
+      <div class="share-row" style="padding-bottom: 60px;">
+        <a href="#" class="btn ghost">Share on X</a>
+        <a href="#" class="btn ghost">Share by email</a>
+      </div>
+    </div>
+  `;
+
+  initFontSizeControl();
+  const bm = document.getElementById("bookmark-btn");
+  bm.addEventListener("click", () => {
+    const active = bm.innerHTML === "&#9829;";
+    bm.innerHTML = active ? "&#9825;" : "&#9829;";
+    bm.style.color = active ? "" : "var(--rust)";
+  });
+});
+</script>
+</body>
+</html>

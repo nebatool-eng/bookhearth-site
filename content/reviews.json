@@ -1,0 +1,49 @@
+{
+  "reviews": [
+    {
+      "slug": "the-bone-season",
+      "title": "The Bone Season",
+      "author": "Samantha Shannon",
+      "genre": "Fantasy",
+      "readingTime": "6 min read",
+      "rating": 4,
+      "coverColor": "#37473B",
+      "excerpt": "A clairvoyant smuggler in a hidden London learns that the empire she serves and the one that hunts her are closer than she thinks.",
+      "body": "Paige Mahoney is a dreamwalker, which in most cities would make her a fortune teller and in Scion London makes her a criminal. She works for a crime syndicate of clairvoyants hidden under the city, running jobs that keep her one step ahead of an authoritarian government that considers people like her a public health risk to be quietly disappeared.\n\nWhat I didn't expect from a book with this much worldbuilding is how fast it moves. Shannon front-loads an enormous amount of invented vocabulary and mostly earns the trust that you'll catch up. I didn't, not on the first fifty pages, and I loved it anyway.\n\nThe back half of the book takes a hard swerve into a walled colony where the real antagonists live, and the tonal shift is the book's biggest risk. It works, mostly because Paige never stops being a person who solves problems by being stubborn rather than special. She's not the chosen one. She's just the one who didn't leave.",
+      "pullQuote": "The city is a rumor that keeps almost coming true.",
+      "pros": ["A magic system with real internal logic and stakes", "A protagonist who is capable without being invincible", "Worldbuilding that rewards a second read"],
+      "cons": ["The first act asks a lot of patience from new readers", "A romance subplot that arrives before it's earned"],
+      "recommendation": "Read this if you liked the political texture of Six of Crows more than its romance, or if you've ever wished a fantasy novel would just trust you to keep up. Give it fifty pages before deciding — the payoff is worth the confusion."
+    },
+    {
+      "slug": "piranesi",
+      "title": "Piranesi",
+      "author": "Susanna Clarke",
+      "genre": "Literary Fantasy",
+      "readingTime": "5 min read",
+      "rating": 5,
+      "coverColor": "#8A6E52",
+      "excerpt": "A man who lives inside an endless, flooding House keeps a diary of tides and statues — until the diary starts asking questions he can't answer.",
+      "body": "Piranesi lives alone in a vast House of infinite halls, tides, and statues, and he is, by his own account, perfectly content. He catalogues the House with the devotion of a scientist and the tenderness of someone in love with his own solitude.\n\nThe novel's quiet trick is how long it lets you sit in that contentment before the cracks show. Someone else has been in the House. Someone else remembers a world before it. The unraveling is gentle, almost reluctant, which makes it more unsettling than a louder mystery ever could be.\n\nThis is a book about memory, isolation, and how a mind can build a home out of whatever it's given, even captivity. It's short, strange, and stayed with me for weeks after I finished it.",
+      "pullQuote": "The Beauty of the House is immeasurable; its Kindness infinite.",
+      "pros": ["A completely singular voice and premise", "Emotionally devastating without a single raised voice", "Rewards close, patient reading"],
+      "cons": ["Very slow to reveal its plot — needs trust up front", "Some readers may want more resolution than it gives"],
+      "recommendation": "Perfect for a quiet weekend where you can read it in one or two sittings. Don't look up spoilers first — the not-knowing is the whole experience."
+    },
+    {
+      "slug": "klara-and-the-sun",
+      "title": "Klara and the Sun",
+      "author": "Kazuo Ishiguro",
+      "genre": "Literary Fiction",
+      "readingTime": "7 min read",
+      "rating": 4,
+      "coverColor": "#A24E1F",
+      "excerpt": "A solar-powered companion observes a family from the corner of a room, and slowly teaches us what devotion looks like from the outside.",
+      "body": "Klara is an Artificial Friend, built to be chosen from a shop window by a lonely child. Ishiguro tells the entire novel through her eyes, and her limited, literal understanding of the world becomes the book's quiet engine — she notices everything and understands almost none of it correctly, and neither, really, do we.\n\nThe family she joins is hiding something, and the slow reveal of what it costs to raise a child in this particular version of the future is where the book earns its ache. Klara's devotion is total and uncomplicated, which makes the humans around her look messier by comparison.\n\nIt's a smaller, quieter book than Never Let Me Go, but it's working the same nerve: what do we owe the things we build to love us.",
+      "pullQuote": "I believe I have many feelings. The more I observe, the more feelings become available to me.",
+      "pros": ["A genuinely original narrative voice", "Builds emotional weight without melodrama", "Says a lot with very restrained prose"],
+      "cons": ["Pacing is deliberately slow in the middle third", "Some world-building details stay frustratingly vague"],
+      "recommendation": "Good for readers who liked the emotional restraint of Never Let Me Go. Go in patient — the ending needs the slow build to land."
+    }
+  ]
+}

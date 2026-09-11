@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reading Lists — Bookhearth</title>
+<meta name="description" content="Curated reading lists: best fantasy, best mystery, books every writer should read, and seasonal favorites.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main>
+  <section class="page-head wrap">
+    <p class="eyebrow">Reading Lists</p>
+    <h1>Shelves, sorted by mood.</h1>
+    <p class="lede mt-lg">Curated lists for whatever kind of reading week you're having.</p>
+  </section>
+
+  <section class="wrap" style="padding-top:0;">
+    <div class="shelf" id="lists-shelf"></div>
+  </section>
+
+  <section class="wrap">
+    <div class="row-list" id="lists-detail"></div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+
+<script src="loader.js"></script>
+<script src="script.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", async () => {
+  const lists = await getReadingLists();
+  const shelf = document.getElementById("lists-shelf");
+  const detail = document.getElementById("lists-detail");
+
+  if (!lists.length) {
+    showEmptyState(detail, "No reading lists published yet.");
+    return;
+  }
+
+  shelf.innerHTML = lists.map(l => `<a class="spine" href="#list-${l.slug}"><span>${l.title}</span></a>`).join("");
+  detail.innerHTML = lists.map(l => `
+    <div class="row-item" id="list-${l.slug}" style="grid-template-columns: 10px 1fr;">
+      <div style="width:10px;height:56px;background:var(--${l.color});"></div>
+      <div>
+        <h3>${l.title}</h3>
+        <p class="excerpt">${l.description || ""} — ${l.count}</p>
+      </div>
+    </div>
+  `).join("");
+});
+</script>
+</body>
+</html>

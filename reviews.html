@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Book Reviews — Bookhearth</title>
+<meta name="description" content="Honest, spoiler-marked book reviews across fantasy, literary fiction, mystery and more.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main>
+  <section class="page-head wrap">
+    <p class="eyebrow">Book Reviews</p>
+    <h1>Books, reviewed like you're already a friend.</h1>
+    <p class="lede mt-lg">Every review includes what worked, what didn't, and the line I underlined twice.</p>
+  </section>
+
+  <section class="wrap" style="padding-top:0;">
+    <div class="row-list" id="reviews-list"></div>
+  </section>
+</main>
+
+<div id="site-footer"></div>
+
+<script src="loader.js"></script>
+<script src="script.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", async () => {
+  const mount = document.getElementById("reviews-list");
+  const reviews = await getReviews();
+  if (!reviews.length) { showEmptyState(mount, "No reviews published yet. Check back soon."); return; }
+  mount.innerHTML = reviews.map(r => `
+    <a class="row-item" href="review.html?slug=${r.slug}">
+      <div class="thumb" style="background: ${r.coverColor};"></div>
+      <div>
+        <div class="meta">${r.genre} · ${r.readingTime} · ${starString(r.rating)}</div>
+        <h3>${r.title} <span style="color: var(--brown); font-size: 0.9rem; font-weight: 400;">— ${r.author}</span></h3>
+        <p class="excerpt">${r.excerpt}</p>
+      </div>
+      <span class="arrow">&#8594;</span>
+    </a>
+  `).join("");
+});
+</script>
+</body>
+</html>

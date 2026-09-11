@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bookhearth — A Home for Readers and Writers</title>
+<meta name="description" content="Bookhearth is a home for readers and writers: honest book reviews, original short stories, and curated reading lists.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<main>
+
+  <section class="hero wrap">
+    <div>
+      <p class="eyebrow" id="hero-eyebrow"></p>
+      <h1 id="hero-title"></h1>
+      <p class="lede" id="hero-lede"></p>
+      <div class="hero-actions">
+        <a href="reviews.html" class="btn">Browse book reviews</a>
+        <a href="stories.html" class="more-link">Read a story</a>
+      </div>
+    </div>
+    <div class="quote-panel">
+      <blockquote id="hero-quote"></blockquote>
+      <cite id="hero-quote-author"></cite>
+    </div>
+  </section>
+
+  <section class="wrap" id="currently-reading-section" style="display:none;">
+    <div class="row-head">
+      <div>
+        <p class="eyebrow">On the nightstand</p>
+        <h2>Currently reading</h2>
+      </div>
+    </div>
+    <div class="row-list" id="currently-reading"></div>
+  </section>
+
+  <section class="wrap" id="featured-review-section" style="display:none;">
+    <p class="eyebrow" id="featured-intro"></p>
+    <h2 style="margin-bottom: 40px;">Featured review</h2>
+    <div class="feature-review" id="featured-review"></div>
+  </section>
+
+  <section class="wrap">
+    <p class="eyebrow">Wander a shelf</p>
+    <h2 style="margin-bottom: 40px;">Categories</h2>
+    <div class="shelf">
+      <a class="spine" href="reviews.html"><span>Book Reviews</span></a>
+      <a class="spine" href="stories.html"><span>Stories</span></a>
+      <a class="spine" href="reading-lists.html"><span>Reading Lists</span></a>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="row-head">
+      <div>
+        <p class="eyebrow">Fresh off the page</p>
+        <h2>Latest stories</h2>
+      </div>
+      <a href="stories.html" class="more-link">All stories</a>
+    </div>
+    <div class="row-list" id="home-stories"></div>
+  </section>
+
+  <section class="wrap">
+    <div class="row-head">
+      <div>
+        <p class="eyebrow">More from the shelf</p>
+        <h2>Other reviews</h2>
+      </div>
+      <a href="reviews.html" class="more-link">All reviews</a>
+    </div>
+    <div class="row-list" id="home-more-reviews"></div>
+  </section>
+
+</main>
+
+<div id="site-footer"></div>
+
+<script src="loader.js"></script>
+<script src="script.js"></script>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      if (!user) {
+        window.netlifyIdentity.on("login", () => { document.location.href = "/admin/"; });
+      }
+    });
+  }
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", async () => {
+  const [settings, reviews, stories] = await Promise.all([getSettings(), getReviews(), getStories()]);
+
+  if (settings) {
+    document.getElementById("hero-eyebrow").textContent = settings.heroEyebrow || "";
+    document.getElementById("hero-title").innerHTML = (settings.heroTitle || "").replace(/\n/g, "<br>");
+    document.getElementById("hero-lede").textContent = settings.heroLede || "";
+    document.getElementById("hero-quote").textContent = `"${settings.quote || ""}"`;
+    document.getElementById("hero-quote-author").textContent = `— ${settings.quoteAuthor || ""}`;
+
+    const cr = reviews.find(r => r.slug === settings.currentlyReadingSlug);
+    if (cr) {
+      document.getElementById("currently-reading-section").style.display = "";
+      document.getElementById("currently-reading").innerHTML = `
+        <a class="row-item" href="review.html?slug=${cr.slug}">
+          <div class="thumb" style="background: ${cr.coverColor};"></div>
+          <div>
+            <div class="meta">${cr.genre}</div>
+            <h3>${cr.title}</h3>
+            <p class="excerpt">${settings.currentlyReadingNote || ""}</p>
+          </div>
+          <span class="arrow">&#8594;</span>
+        </a>`;
+    }
+
+    const featured = reviews.find(r => r.slug === settings.featuredReviewSlug);
+    if (featured) {
+      document.getElementById("featured-review-section").style.display = "";
+      document.getElementById("featured-intro").textContent = settings.featuredIntro || "";
+      document.getElementById("featured-review").innerHTML = `
+        <div class="cover" style="background: ${featured.coverColor};"></div>
+        <div>
+          <div class="rating">${starString(featured.rating)}</div>
+          <h3 style="font-size: 1.8rem; margin-bottom: 10px;">${featured.title} — ${featured.author}</h3>
+          <p class="excerpt">${featured.excerpt}</p>
+          <a href="review.html?slug=${featured.slug}" class="more-link mt-lg" style="display:inline-block;">Read the full review</a>
+        </div>`;
+    }
+  }
+
+  const storyMount = document.getElementById("home-stories");
+  if (stories.length) {
+    storyMount.innerHTML = stories.slice(0, 3).map(s => `
+      <a class="row-item" href="story.html?slug=${s.slug}">
+        <div class="thumb" style="background: linear-gradient(160deg,#8A6E52,#5c4936);"></div>
+        <div>
+          <div class="meta">${s.kind} · ${s.readingTime}</div>
+          <h3>${s.title}</h3>
+          <p class="excerpt">${s.excerpt}</p>
+        </div>
+        <span class="arrow">&#8594;</span>
+      </a>
+    `).join("");
+  } else {
+    showEmptyState(storyMount, "No stories published yet.");
+  }
+
+  const reviewMount = document.getElementById("home-more-reviews");
+  const others = reviews.filter(r => r.slug !== (settings?.featuredReviewSlug)).slice(0, 3);
+  if (others.length) {
+    reviewMount.innerHTML = others.map(r => `
+      <a class="row-item" href="review.html?slug=${r.slug}">
+        <div class="thumb" style="background: ${r.coverColor};"></div>
+        <div>
+          <div class="meta">${r.genre} · ${r.readingTime}</div>
+          <h3>${r.title} <span style="color: var(--brown); font-size: 0.9rem; font-weight: 400;">— ${r.author}</span></h3>
+          <p class="excerpt">${r.excerpt}</p>
+        </div>
+        <span class="arrow">&#8594;</span>
+      </a>
+    `).join("");
+  } else {
+    showEmptyState(reviewMount, "No reviews published yet.");
+  }
+});
+</script>
+
+</body>
+</html>

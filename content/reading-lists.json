@@ -1,0 +1,9 @@
+{
+  "readingLists": [
+    { "slug": "best-fantasy-books", "title": "Best Fantasy Books", "count": "14 books", "color": "forest", "description": "Worldbuilding-heavy picks for readers who like their magic systems with real rules." },
+    { "slug": "best-mystery-books", "title": "Best Mystery Books", "count": "11 books", "color": "rust", "description": "Slow-burn whodunits and a few that break the rules of the genre on purpose." },
+    { "slug": "books-every-writer-should-read", "title": "Books Every Writer Should Read", "count": "9 books", "color": "brown", "description": "Less craft-book, more 'read this and steal the technique.'" },
+    { "slug": "monthly-favorites-september", "title": "Monthly Favorites — September", "count": "6 books", "color": "gold", "description": "What actually got finished this month, warts and all." },
+    { "slug": "seasonal-autumn-reading", "title": "Seasonal: Autumn Reading", "count": "8 books", "color": "ink", "description": "Books that want a blanket, a warm drink, and low light." }
+  ]
+}
